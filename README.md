@@ -4,7 +4,7 @@ Project Title : List of funniest names in the world\
 Project overview :
 It is the platform where people can log in and post the funniest,commical,unusual name that they came across.
 
-Key Features :
+*Key Features :*
 User Authentication : Gives us a secure login and register for the list.
 CRUD operation : People can add , delete , edit , view the name that they have registered at any time.
 Voting : People can vote to the crazy name that they like and will be rewarded to the person who registered it.

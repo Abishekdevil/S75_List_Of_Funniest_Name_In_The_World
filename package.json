@@ -1,0 +1,19 @@
+{
+  "name": "s75_list_of_funniest_name_in_the_world",
+  "version": "1.0.0",
+  "description": "Project Title : List of funniest names in the world\\",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+
+  "license": "ISC",
+  "keywords": [],
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+
+  "license": "ISC"
+
+}
