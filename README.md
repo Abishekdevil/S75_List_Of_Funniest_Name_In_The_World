@@ -19,3 +19,7 @@ Database : For storing user data the application contains MongoDB.
 Why this project :
 The goal is to engage the people to share the amusing name that they heard from different cultures,countries to spread the diversity among people and to unite them.The project encourages user interaction with a personalized and entertaining experience.
 
+
+
+
+Deployment Link : https://s75-list-of-funniest-name-in-the-world.onrender.com
