@@ -1,11 +1,20 @@
 const express = require("express")
 const app = express();
-const PORT = 5000;
+require("dotenv").config();
+const Mongoose = require("mongoose");
+const PORT = 3001; // Not nes
 
-app.get("/ping",(req,res)=>{
+app.get("/ping", (req, res)=>{
     res.send("pong")
 });
 
-app.listen(PORT,()=>{
+const MONGO_URI = process.env.uri;
+Mongoose.connect(MONGO_URI)
+.then(()=> console.log("Database connected successfully"))
+.catch((err)=>{
+    console.log("Error found:",err)
+})
+
+app.listen(PORT, ()=>{
     console.log(`Server is running on http://localhost:${PORT}`);
 })
