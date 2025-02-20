@@ -35,7 +35,7 @@ const App = () => {
       >
         <h2 style={{ fontSize: "2rem", color: "#333" }}>🤣 Sneak Peek:</h2>
         <ul style={{ textAlign: "left", fontSize: "1.2rem", listStyleType: "none", padding: 0 }}>
-          <li>✅ Ben Dover</li>
+          
           <li>✅ Anita Bath</li>
           <li>✅ Brock Lee</li>
           <li>✅ Sue Yu</li>
