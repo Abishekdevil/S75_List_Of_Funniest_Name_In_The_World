@@ -25,5 +25,5 @@ The goal is to engage the people to share the amusing name that they heard from 
 Deployment Link : https://s75-list-of-funniest-name-in-the-world.onrender.com
 
 
-Deployment Link : https://funny123.netlify.app/
+Deployment Link : https://funny123.netlify.app
 
