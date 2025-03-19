@@ -24,33 +24,33 @@ const App = () => {
     }
   };
   
-  // useEffect(() => {
-  //   fetchItems();
-  //   console.log("Current state of items:", items);
-  // }, []);
+  useEffect(() => {
+    fetchItems();
+    console.log("Current state of items:", items);
+  }, []);
   
 
 
-  // const addItem = async () => {
-  //   if (!newItem.trim() || !newDescription.trim()) return;
+  const addItem = async () => {
+    if (!newItem.trim() || !newDescription.trim()) return;
 
-  //   try {
-  //     const response = await fetch("http://localhost:5000/api/items", {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({ name: newItem, description: newDescription }),
-  //     });
+    try {
+      const response = await fetch("http://localhost:5000/api/items", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: newItem, description: newDescription }),
+      });
 
-  //     if (response.ok) {
-  //       setNewItem(""); // Clear input field
-  //       setNewDescription("");
-  //       setShowForm(false); // Close form
-  //       fetchItems(); // 🔄 Refetch items from backend to ensure new item appears
-  //     }
-  //   } catch (error) {
-  //     console.error("Error adding item:", error);
-  //   }
-  // };
+      if (response.ok) {
+        setNewItem("");
+        setNewDescription("");
+        setShowForm(false); 
+        fetchItems();
+      }
+    } catch (error) {
+      console.error("Error adding item:", error);
+    }
+  };
 
   return (
     <div className="app-container">
@@ -58,8 +58,8 @@ const App = () => {
       <p className="app-description">
         A collection of the most hilarious, weird, and unbelievable names from around the world!
       </p>
-{/* 
-      
+
+   
       <button className="add-item-button" onClick={() => setShowForm(true)}>➕ Add Funny Name</button>
 
       
@@ -83,7 +83,7 @@ const App = () => {
             <button className="close-button" onClick={() => setShowForm(false)}>❌ Close</button>
           </div>
         </div>
-      )} */}
+      )};
 
       
       <div className="card-container">
