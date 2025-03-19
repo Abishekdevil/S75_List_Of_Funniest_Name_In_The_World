@@ -11,20 +11,20 @@ const itemSchema = new mongoose.Schema({
 const Item = mongoose.model("Item", itemSchema);
 
 
-router.post("/items", async (req, res) => {
-  const { name, description } = req.body;
-  if (!name || !description) {
-    return res.status(400).json({ message: "Name and description are required" });
-  }
+// router.post("/items", async (req, res) => {
+//   const { name, description } = req.body;
+//   if (!name || !description) {
+//     return res.status(400).json({ message: "Name and description are required" });
+//   }
 
-  try {
-    const newItem = new Item({ name, description });
-    await newItem.save();
-    res.status(201).json(newItem);
-  } catch (error) {
-    res.status(500).json({ message: "Server Error", error });
-  }
-});
+//   try {
+//     const newItem = new Item({ name, description });
+//     await newItem.save();
+//     res.status(201).json(newItem);
+//   } catch (error) {
+//     res.status(500).json({ message: "Server Error", error });
+//   }
+// });
 
 router.get("/items", async (req, res) => {
   try {
