@@ -6,7 +6,12 @@ require("dotenv").config();
 const routes = require("./route");
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
+
+const URI=process.env.uri
+mongoose.connect(URI)
+.then(()=>console.log("Database connected successfull"))
+.catch((err)=>console.log("Error in connecting",err))
 
 
 app.use(express.json());
