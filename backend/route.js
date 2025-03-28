@@ -33,7 +33,7 @@ router.get("/items", async (req, res) => {
     const items = await Item.find();
     res.json(items);
   } catch (error) {
-    res.status(500).json({ message: "Server Error", error });
+    res.status(500).json({ message: "Internal Server Error", error });
   }
 });
 
@@ -44,7 +44,7 @@ router.get("/items/:id", async (req, res) => {
 
     res.json(item);
   } catch (error) {
-    res.status(500).json({ message: "Server Error", error });
+    res.status(500).json({ message: " Internal Server Error", error });
   }
 });
 
