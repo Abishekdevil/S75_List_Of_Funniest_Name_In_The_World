@@ -31,26 +31,26 @@ const App = () => {
   
 
 
-  // const addItem = async () => {
-  //   if (!newItem.trim() || !newDescription.trim()) return;
+  const addItem = async () => {
+    if (!newItem.trim() || !newDescription.trim()) return;
 
-  //   try {
-  //     const response = await fetch("http://localhost:5000/api/items", {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({ name: newItem, description: newDescription }),
-  //     });
+    try {
+      const response = await fetch("http://localhost:5000/api/items", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: newItem, description: newDescription }),
+      });
 
-  //     if (response.ok) {
-  //       setNewItem("");
-  //       setNewDescription("");
-  //       setShowForm(false); 
-  //       fetchItems();
-  //     }
-  //   } catch (error) {
-  //     console.error("Error adding item:", error);
-  //   }
-  // };
+      if (response.ok) {
+        setNewItem("");
+        setNewDescription("");
+        setShowForm(false); 
+        fetchItems();
+      }
+    } catch (error) {
+      console.error("Error adding item:", error);
+    }
+  };
 
   return (
     <div className="app-container">
@@ -60,7 +60,7 @@ const App = () => {
       </p>
 
    
-      {/* <button className="add-item-button" onClick={() => setShowForm(true)}>➕ Add Funny Name</button>
+       <button className="add-item-button" onClick={() => setShowForm(true)}>➕ Add Funny Name</button>
 
       
       {showForm && (
@@ -83,7 +83,7 @@ const App = () => {
             <button className="close-button" onClick={() => setShowForm(false)}>❌ Close</button>
           </div>
         </div>
-      )}; */}
+      )}
 
       
       <div className="card-container">
@@ -100,4 +100,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default App

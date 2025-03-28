@@ -17,13 +17,13 @@ mongoose.connect(URI)
 app.use(express.json());
 app.use(cors()); 
 
-
 app.get("/ping", (req, res) => {
     res.send("pong");
 });
 
 
 app.use("/api", routes);
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
