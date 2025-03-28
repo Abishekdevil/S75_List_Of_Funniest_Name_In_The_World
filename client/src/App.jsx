@@ -60,7 +60,7 @@ const App = () => {
       </p>
 
    
-      <button className="add-item-button" onClick={() => setShowForm(true)}>➕ Add Funny Name</button>
+       <button className="add-item-button" onClick={() => setShowForm(true)}>➕ Add Funny Name</button>
 
       
       {showForm && (
@@ -83,7 +83,7 @@ const App = () => {
             <button className="close-button" onClick={() => setShowForm(false)}>❌ Close</button>
           </div>
         </div>
-      )};
+      )}
 
       
       <div className="card-container">
@@ -100,4 +100,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default App
