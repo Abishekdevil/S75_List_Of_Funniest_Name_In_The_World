@@ -7,17 +7,13 @@ const userSchema = new mongoose.Schema({
   role: { type: String, enum: ["admin", "user"], default: "user" },
 });
 
-const user=mongoose.model('user',userSchema)
+const itemSchema = new mongoose.Schema({
+  name: { type: String, required: true, trim: true },
+  description: { type: String, required: true, trim: true },
+  created_by: { type: String, required: true }, 
+}, { timestamps: true });
 
-const details=new mongoose.Schema({
-    FunnyName:{
-        type:String,required:true
-    },
-    Description:{
-        type:String,
-        required:true
-    }
-})
-const detail=mongoose.model('detail',details)
+const User = mongoose.model("User", userSchema);
+const Item = mongoose.model("Item", itemSchema);
 
-mongoose.exports={detail,user}
+module.exports = { User, Item };
