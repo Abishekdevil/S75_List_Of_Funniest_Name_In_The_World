@@ -6,6 +6,8 @@ const App = () => {
   const [newItem, setNewItem] = useState("");
   const [newDescription, setNewDescription] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedUser, setSelectedUser] = useState(""); // For filtering and form
+  const [createdByValues, setCreatedByValues] = useState([]); // All creators
   const [showForm, setShowForm] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
 
@@ -18,24 +20,33 @@ const App = () => {
       const response = await fetch("http://localhost:5000/api/items");
       const data = await response.json();
       setItems(data);
+
+      // Extract unique 'created_by' values
+      const creators = [...new Set(data.map((item) => item.created_by))];
+      setCreatedByValues(creators);
     } catch (error) {
       console.error("Error fetching items:", error);
     }
   };
 
   const addItem = async () => {
-    if (!newItem.trim() || !newDescription.trim()) return;
+    if (!newItem.trim() || !newDescription.trim() || !selectedUser.trim()) return;
 
     try {
       const response = await fetch("http://localhost:5000/api/items", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: newItem, description: newDescription }),
+        body: JSON.stringify({
+          name: newItem,
+          description: newDescription,
+          created_by: selectedUser,
+        }),
       });
 
       if (response.ok) {
         setNewItem("");
         setNewDescription("");
+        setSelectedUser("");
         setShowForm(false);
         fetchItems();
       }
@@ -65,12 +76,17 @@ const App = () => {
       const response = await fetch(`http://localhost:5000/api/items/${editingItem._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: newItem, description: newDescription }),
+        body: JSON.stringify({
+          name: newItem,
+          description: newDescription,
+          created_by: selectedUser,
+        }),
       });
 
       if (response.ok) {
         setNewItem("");
         setNewDescription("");
+        setSelectedUser("");
         setEditingItem(null);
         setShowForm(false);
         fetchItems();
@@ -84,12 +100,15 @@ const App = () => {
     setEditingItem(item);
     setNewItem(item.name);
     setNewDescription(item.description);
+    setSelectedUser(item.created_by);
     setShowForm(true);
   };
 
-  const filteredItems = items.filter((item) =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredItems = items.filter((item) => {
+    const nameMatch = item.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const userMatch = selectedUser ? item.created_by === selectedUser : true;
+    return nameMatch && userMatch;
+  });
 
   return (
     <div className="app-container">
@@ -98,7 +117,6 @@ const App = () => {
         A collection of the most hilarious, weird, and unbelievable names from around the world!
       </p>
 
-      {/* 🔍 Search Bar */}
       <div className="search-container">
         <input
           type="text"
@@ -109,12 +127,29 @@ const App = () => {
         />
       </div>
 
-      <button className="add-item-button" onClick={() => {
-        setShowForm(true);
-        setEditingItem(null);
-        setNewItem("");
-        setNewDescription("");
-      }}>
+      <div className="dropdown-container">
+        <select
+          value={selectedUser}
+          onChange={(e) => setSelectedUser(e.target.value)}
+          className="user-dropdown"
+        >
+          <option value="">-- Show All Creators --</option>
+          {createdByValues.map((creator) => (
+            <option key={creator} value={creator}>{creator}</option>
+          ))}
+        </select>
+      </div>
+
+      <button
+        className="add-item-button"
+        onClick={() => {
+          setShowForm(true);
+          setEditingItem(null);
+          setNewItem("");
+          setNewDescription("");
+          setSelectedUser("");
+        }}
+      >
         ➕ Add Funny Name
       </button>
 
@@ -134,6 +169,12 @@ const App = () => {
               value={newDescription}
               onChange={(e) => setNewDescription(e.target.value)}
             /><br /><br />
+            <input
+              type="text"
+              placeholder="Your name (creator)"
+              value={selectedUser}
+              onChange={(e) => setSelectedUser(e.target.value)}
+            /><br /><br />
             <button onClick={editingItem ? updateItem : addItem}>
               {editingItem ? "Update" : "Submit"}
             </button>
@@ -142,13 +183,13 @@ const App = () => {
         </div>
       )}
 
-      {/* 🧾 Funny Name Cards */}
       <div className="card-container">
         {filteredItems.length > 0 ? (
           filteredItems.map((item) => (
             <div className="card" key={item._id}>
               <h3>{item.name}</h3>
               <p>{item.description}</p>
+              <p><strong>By:</strong> {item.created_by}</p>
               <button onClick={() => startEditing(item)}>✏️ Edit</button>
               <button onClick={() => deleteItem(item._id)}>🗑️ Delete</button>
             </div>
